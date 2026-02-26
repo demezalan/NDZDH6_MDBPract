@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<egyetemi_rendszer xmlns:xs="http://www.w3.org/2003/XMLSchema">
+
+    <!-- egyetemek -->
+    <egyetem om="1492HU">
+        <nev>Budapesti Műszaki és Gazdaságtudományi Egyetem</nev>
+        <elhelyezkedes>
+            <varos>Budapest</varos>
+            <utca>Műegyetem rkp.</utca>
+            <hazszam>3</hazszam>
+        </elhelyezkedes>
+        <elerhetoseg>
+            <telefon>+36 1 463-1111</telefon>
+            <email>info@mit.bme.hu</email>
+            <fax>+36 1 463-1110</fax>
+        </elerhetoseg>
+    </egyetem>
+
+    <egyetem om="1493HU">
+        <nev>Eötvös Loránd Tudományegyetem</nev>
+        <elhelyezkedes>
+            <varos>Budapest</varos>
+            <utca>Pázmány Péter sétány</utca>
+            <hazszam>1/A</hazszam>
+        </elhelyezkedes>
+        <elerhetoseg>
+            <telefon>+36 1 411-6500</telefon>
+            <email>info@elte.hu</email>
+            <fax>+36 1 411-6501</fax>
+        </elerhetoseg>
+    </egyetem>
+
+    <egyetem om="1494HU">
+        <nev>Debreceni Egyetem</nev>
+        <elhelyezkedes>
+            <varos>Debrecen</varos>
+            <utca>Oktatócentrum</utca>
+            <hazszam>1</hazszam>
+        </elhelyezkedes>
+        <elerhetoseg>
+            <telefon>+36 52 512-900</telefon>
+            <email>info@de.edu</email>
+        </elerhetoseg>
+    </egyetem>
+
+
+    <!-- eloadok -->
+    <eloado lid="l1">
+        <nev>Dr. Kovács Ágnes</nev>
+        <lakcim>Budapest, Rákóczi út 10</lakcim>
+        <elerhetoseg>
+            <telefon>+36 20 123-4567</telefon>
+            <email>kovacs.agnes@bme.hu</email>
+        </elerhetoseg>
+        <irodaszam>324</irodaszam>
+    </eloado>
+
+    <eloado lid="l2">
+        <nev>Dr. Szabó Péter</nev>
+        <lakcim>Debrecen, Kossuth Lajos utca 5</lakcim>
+        <elerhetoseg>
+            <telefon>+36 30 987-6543</telefon>
+            <email>szabo.peter@de.edu</email>
+        </elerhetoseg>
+        <irodaszam>215</irodaszam>
+    </eloado>
+
+    <eloado lid="l3">
+        <nev>Dr. Nagy Eszter</nev>
+        <lakcim>Szeged, Rákóczi Ferenc utca 15</lakcim>
+        <elerhetoseg>
+            <telefon>+36 70 555-1234</telefon>
+            <email>nagy.eszter@szeged.edu</email>
+        </elerhetoseg>
+        <irodaszam>108</irodaszam>
+    </eloado>
+
+
+    <!-- hallgatok -->
+    <hallgato sid="s1">
+        <nev>Kovács László</nev>
+        <lakcim>
+            <varos>Budapest</varos>
+            <utca>Petőfi Sándor</utca>
+            <hazszam>10</hazszam>
+        </lakcim>
+        <email>kovacs.laszlo@bme.hu</email>
+        <szuletesi_ido>1995-05-20</szuletesi_ido>
+    </hallgato>
+
+    <hallgato sid="s2">
+        <nev>Szűcs Eszter</nev>
+        <lakcim>
+            <varos>Debrecen</varos>
+            <utca>Kossuth Lajos utca</utca>
+            <hazszam>5</hazszam>
+        </lakcim>
+        <email>szucs.eszter@de.edu</email>
+        <szuletesi_ido>1996-08-15</szuletesi_ido>
+    </hallgato>
+
+    <hallgato sid="s3">
+        <nev>Horváth Péter</nev>
+        <lakcim>
+            <varos>Szeged</varos>
+            <utca>Rákóczi Ferenc utca</utca>
+            <hazszam>15</hazszam>
+        </lakcim>
+        <email>horvath.peter@szeged.edu</email>
+        <szuletesi_ido>1997-03-10</szuletesi_ido>
+    </hallgato>
+
+
+    <!-- kurzusok -->
+    <kurzus kurzuskod="k1">
+        <nyelv>magyar</nyelv>
+        <tipus>előadás</tipus>
+        <idotartam>90 perc</idotartam>
+        <max_fo>100</max_fo>
+    </kurzus>
+
+    <kurzus kurzuskod="k2">
+        <nyelv>angol</nyelv>
+        <tipus>gyakorlat</tipus>
+        <idotartam>60 perc</idotartam>
+        <max_fo>30</max_fo>
+    </kurzus>
+
+    <kurzus kurzuskod="k3">
+        <nyelv>magyar</nyelv>
+        <tipus>szeminárium</tipus>
+        <idotartam>120 perc</idotartam>
+        <max_fo>20</max_fo>
+    </kurzus>
+
+
+    <!-- targyak -->
+    <targy targykod="t1">
+        <nev>Adatbázisok</nev>
+        <kredit>5</kredit>
+        <kovetelmeny>GEMAL342B</kovetelmeny>
+    </targy>
+
+    <targy targykod="t2">
+        <nev>Algoritmusok</nev>
+        <kredit>4</kredit>
+        <kovetelmeny>GEMAL342A</kovetelmeny>
+    </targy>
+
+    <targy targykod="t3">
+        <nev>Operációs rendszerek</nev>
+        <kredit>6</kredit>
+        <kovetelmeny>GEMAL342C</kovetelmeny>
+    </targy>
+
+
+    <!-- szerzodesek -->
+    <szerzodes lid="l1" om="1492HU">
+        <statusz>aktív</statusz>
+        <szervezeti_egyseg>Informatikai Kar</szervezeti_egyseg>
+    </szerzodes>
+
+    <szerzodes lid="l2" om="1493HU">
+        <statusz>aktív</statusz>
+        <szervezeti_egyseg>Természettudományi Kar</szervezeti_egyseg>
+    </szerzodes>
+
+    <szerzodes lid="l3" om="1494HU">
+        <statusz>aktív</statusz>
+        <szervezeti_egyseg>Természettudományi és Informatikai Kar</szervezeti_egyseg>
+    </szerzodes>
+
+</egyetemi_rendszer>
