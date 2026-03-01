@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<vendeglatas xmlns:xs="http://www.w3.org/2003/XMLSchema" xsl:schemaLocation="http://www.w3.org/2003/XMLSchema NDZDH6_XMLSchema.xsd">
+<vendeglatas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="NDZDH6_XMLSchema.xsd">
 
     <!-- ettermek -->
     <etterem ekod="e1">
@@ -132,29 +132,23 @@
     </vendeg>
 
     <!-- rendelesek -->
-    <rendeles e_gy="e1" e_v="v1">
+    <rendeles e_v_e="e1" e_v_v="v1">
         <osszeg>23500</osszeg>
         <etel>Gulyásleves</etel>
-        <etel>Rántott hús</etel>
-        <etel>Túrós csusza</etel>
     </rendeles>
 
-    <rendeles e_gy="e2" e_v="v2">
+    <rendeles e_v_e="e2" e_v_v="v2">
         <osszeg>18000</osszeg>
         <etel>Halászlé</etel>
-        <etel>Hortobágyi palacsinta</etel>
     </rendeles>
 
-    <rendeles e_gy="e2" e_v="v3">
+    <rendeles e_v_e="e2" e_v_v="v3">
         <osszeg>15000</osszeg>
         <etel>Gulyásleves</etel>
-        <etel>Rántott sajt</etel>
     </rendeles>
 
-    <rendeles e_gy="e2" e_v="v4">
+    <rendeles e_v_e="e2" e_v_v="v4">
         <osszeg>20000</osszeg>
-        <etel>Halászlé</etel>
-        <etel>Hortobágyi palacsinta</etel>
         <etel>Túrós csusza</etel>
     </rendeles>
 
