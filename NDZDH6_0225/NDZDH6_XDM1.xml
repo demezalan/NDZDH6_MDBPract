@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<egyetemi_rendszer xmlns:xs="http://www.w3.org/2003/XMLSchema">
+<egyetemi_rendszer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="NDZDH6_XMLSchema1.xsd">
 
     <!-- egyetemek -->
     <egyetem om="1492HU">
@@ -170,5 +170,66 @@
         <statusz>aktív</statusz>
         <szervezeti_egyseg>Természettudományi és Informatikai Kar</szervezeti_egyseg>
     </szerzodes>
+
+
+    <!-- beiratkozasok -->
+    <beiratkozas sid="s1" om="1492HU">
+        <kepzes_neve>BSc Informatika</kepzes_neve>
+        <statusz>aktív</statusz>
+        <tagozat>nappali</tagozat>
+        <szervezeti_egyseg>Informatikai Kar</szervezeti_egyseg>
+    </beiratkozas>
+
+    <beiratkozas sid="s2" om="1493HU">
+        <kepzes_neve>BSc Biológia</kepzes_neve>
+        <statusz>passzív</statusz>
+        <tagozat>nappali</tagozat>
+        <szervezeti_egyseg>Természettudományi Kar</szervezeti_egyseg>
+    </beiratkozas>
+
+    <beiratkozas sid="s3" om="1494HU">
+        <kepzes_neve>BSc Fizika</kepzes_neve>
+        <statusz>aktív</statusz>
+        <tagozat>levelező</tagozat>
+        <szervezeti_egyseg>Természettudományi és Informatikai Kar</szervezeti_egyseg>
+    </beiratkozas>
+
+    <beiratkozas sid="s1" om="1493HU">
+        <kepzes_neve>BSc Biológia</kepzes_neve>
+        <statusz>aktív</statusz>
+        <tagozat>nappali</tagozat>
+        <szervezeti_egyseg>Természettudományi Kar</szervezeti_egyseg>
+    </beiratkozas>
+
+
+    <!-- oktatasok -->
+    <oktat lid="l1" targykod="t1"/>
+
+    <oktat lid="l2" targykod="t2"/>
+
+    <oktat lid="l3" targykod="t3"/>
+
+
+    <!-- resztvevok -->
+    <reszt_vesz sid="s1" kurzuskod="k1"/>
+
+    <reszt_vesz sid="s2" kurzuskod="k2"/>
+
+    <reszt_vesz sid="s3" kurzuskod="k3"/>
+
+
+    <!-- eloadasok -->
+    <eloadas targykod="t1" kurzuskod="k1">
+        <idopont>kedd 8:00</idopont>
+    </eloadas>
+
+    <eloadas targykod="t2" kurzuskod="k2">
+        <idopont>szerda 10:00</idopont>
+    </eloadas>
+
+    <eloadas targykod="t3" kurzuskod="k3">
+        <idopont>csütörtök 14:00</idopont>
+    </eloadas>
+        
 
 </egyetemi_rendszer>
