@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- saját típusok -->
+    <xs:element name="egyetemi_rendszer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="egyetem" type="egyetemTipus" maxOccurs="unbounded" />
+                <xs:element name="eloado" type="eloadoTipus" maxOccurs="unbounded" />
+                <xs:element name="hallgato" type="hallgatoTipus" maxOccurs="unbounded" />
+                <xs:element name="kurzus" type="kurzusTipus" maxOccurs="unbounded" />
+                <xs:element name="targy" type="targyTipus" maxOccurs="unbounded" />
+                <xs:element name="szerzodes" type="szerzodesTipus" maxOccurs="unbounded" />
+                <xs:element name="beiratkozas" type="beiratkozasTipus" maxOccurs="unbounded" />
+                <xs:element name="oktat" type="oktatTipus" maxOccurs="unbounded" />
+                <xs:element name="reszt_vesz" type="reszt_veszTipus" maxOccurs="unbounded" />
+                <xs:element name="eloadas" type="eloadasTipus" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+
+        <!-- PK kulcsok -->
+        <xs:key name="egyetem_kulcs">
+            <xs:selector xpath="egyetem" />
+            <xs:field xpath="@om" />
+        </xs:key>
+
+        <xs:key name="eloado_kulcs">
+            <xs:selector xpath="eloado" />
+            <xs:field xpath="@lid" />
+        </xs:key>
+
+        <xs:key name="hallgato_kulcs">
+            <xs:selector xpath="hallgato" />
+            <xs:field xpath="@sid" />
+        </xs:key>
+
+        <xs:key name="kurzus_kulcs">
+            <xs:selector xpath="kurzus" />
+            <xs:field xpath="@kurzuskod" />
+        </xs:key>
+
+        <xs:key name="targy_kulcs">
+            <xs:selector xpath="targy" />
+            <xs:field xpath="@targykod" />
+        </xs:key>
+
+        <!-- FK kulcsok -->
+        <xs:keyref refer="eloado_kulcs" name="szerzodes_eloado_idegen_kulcs">
+            <xs:selector xpath="szerzodes" />
+            <xs:field xpath="@lid" />
+        </xs:keyref>
+        <xs:keyref refer="egyetem_kulcs" name="szerzodes_egyetem_idegen_kulcs">
+            <xs:selector xpath="szerzodes" />
+            <xs:field xpath="@om" />
+        </xs:keyref>
+
+        <xs:keyref refer="hallgato_kulcs" name="beiratkozas_hallgato_idegen_kulcs">
+            <xs:selector xpath="beiratkozas" />
+            <xs:field xpath="@sid" />
+        </xs:keyref>
+        <xs:keyref refer="egyetem_kulcs" name="beiratkozas_egyetem_idegen_kulcs">
+            <xs:selector xpath="beiratkozas" />
+            <xs:field xpath="@om" />
+        </xs:keyref>
+
+        <xs:keyref refer="eloado_kulcs" name="oktat_eloado_idegen_kulcs">
+            <xs:selector xpath="oktat" />
+            <xs:field xpath="@lid" />
+        </xs:keyref>
+        <xs:keyref refer="targy_kulcs" name="oktat_targy_idegen_kulcs">
+            <xs:selector xpath="oktat" />
+            <xs:field xpath="@targykod" />
+        </xs:keyref>
+
+        <xs:keyref refer="hallgato_kulcs" name="resztvesz_hallgato_idegen_kulcs">
+            <xs:selector xpath="reszt_vesz" />
+            <xs:field xpath="@sid" />
+        </xs:keyref>
+        <xs:keyref refer="kurzus_kulcs" name="resztvesz_kurzus_idegen_kulcs">
+            <xs:selector xpath="reszt_vesz" />
+            <xs:field xpath="@kurzuskod" />
+        </xs:keyref>
+
+        <xs:keyref refer="targy_kulcs" name="eloadas_targy_idegen_kulcs">
+            <xs:selector xpath="eloadas" />
+            <xs:field xpath="@targykod" />
+        </xs:keyref>
+        <xs:keyref refer="kurzus_kulcs" name="eloadas_kurzus_idegen_kulcs">
+            <xs:selector xpath="eloadas" />
+            <xs:field xpath="@kurzuskod" />
+        </xs:keyref>
+
+    </xs:element>
+
+    <!-- komplex tipusok -->
+    <xs:complexType name="egyetemTipus">
+        <xs:sequence>
+            <xs:element name="nev" type="xs:string" />
+            <xs:element name="elhelyezkedes" type="cimTipus" />
+            <xs:element name="elerhetoseg" type="elerhetosegTipus" />
+        </xs:sequence>
+        <xs:attribute name="om" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="cimTipus">
+        <xs:sequence>
+            <xs:element name="varos" type="xs:string" />
+            <xs:element name="utca" type="xs:string" />
+            <xs:element name="hazszam" type="xs:string" /> </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="elerhetosegTipus">
+        <xs:sequence>
+            <xs:element name="telefon" type="xs:string" />
+            <xs:element name="email" type="xs:string" />
+            <xs:element name="fax" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="eloadoTipus">
+        <xs:sequence>
+            <xs:element name="nev" type="xs:string" />
+            <xs:element name="lakcim" type="xs:string" />
+            <xs:element name="elerhetoseg" type="elerhetosegTipus" />
+            <xs:element name="irodaszam" type="xs:integer" />
+        </xs:sequence>
+        <xs:attribute name="lid" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="hallgatoTipus">
+        <xs:sequence>
+            <xs:element name="nev" type="xs:string" />
+            <xs:element name="lakcim" type="cimTipus" />
+            <xs:element name="email" type="xs:string" />
+            <xs:element name="szuletesi_ido" type="xs:date" />
+        </xs:sequence>
+        <xs:attribute name="sid" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="kurzusTipus">
+        <xs:sequence>
+            <xs:element name="nyelv" type="xs:string" />
+            <xs:element name="tipus" type="xs:string" />
+            <xs:element name="idotartam" type="xs:string" />
+            <xs:element name="max_fo" type="xs:integer" />
+        </xs:sequence>
+        <xs:attribute name="kurzuskod" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="targyTipus">
+        <xs:sequence>
+            <xs:element name="nev" type="xs:string" />
+            <xs:element name="kredit" type="xs:integer" />
+            <xs:element name="kovetelmeny" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="targykod" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="szerzodesTipus">
+        <xs:sequence>
+            <xs:element name="statusz" type="xs:string" />
+            <xs:element name="szervezeti_egyseg" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="lid" type="xs:string" use="required" />
+        <xs:attribute name="om" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="beiratkozasTipus">
+        <xs:sequence>
+            <xs:element name="kepzes_neve" type="xs:string" />
+            <xs:element name="statusz" type="xs:string" />
+            <xs:element name="tagozat" type="xs:string" />
+            <xs:element name="szervezeti_egyseg" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="sid" type="xs:string" use="required" />
+        <xs:attribute name="om" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="oktatTipus">
+        <xs:attribute name="lid" type="xs:string" use="required" />
+        <xs:attribute name="targykod" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="reszt_veszTipus">
+        <xs:attribute name="sid" type="xs:string" use="required" />
+        <xs:attribute name="kurzuskod" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="eloadasTipus">
+        <xs:sequence>
+            <xs:element name="idopont" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="targykod" type="xs:string" use="required" />
+        <xs:attribute name="kurzuskod" type="xs:string" use="required" />
+    </xs:complexType>
+
+</xs:schema>
