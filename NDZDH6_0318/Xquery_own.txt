@@ -1,0 +1,78 @@
+(: Osszes hallgato: :)
+doc("/db/egyetem.xml")//hallgato
+
+
+
+(: Magyar nyelvu kurzusok: :)
+
+for $k in doc("/db/egyetem.xml")//kurzus
+where $k/nyelv = 'magyar'
+return
+    <kurzus>
+        <KurzusKod>{data($k/@kurzuskod)}</KurzusKod>
+        <Tipus>{data($k/tipus)}</Tipus>
+        <Idotartam>{data($k/idotartam)}</Idotartam>
+        <MaxFo>{data($k/max_fo)}</MaxFo>
+    </kurzus>
+
+
+
+(: 5 kredites targyak: :)
+
+for $t in doc("/db/egyetem.xml")//targy
+where $t/kredit = 5
+return
+    <targy>
+        <TargyKod>{data($t/@targykod)}</TargyKod>
+        <Nev>{data($t/nev)}</Nev>
+        <Kovetelmeny>{data($t/kovetelmeny)}</Kovetelmeny>
+        <Kredit>{data($t/kredit)}</Kredit>
+    </targy>
+
+
+
+(: Budapesti lakcimmel rendelkezo hallgatok: :)
+
+for $h in doc("/db/egyetem.xml")//hallgato
+where $h/lakcim/varos = "Budapest"
+return
+    <hallgato>
+        <HallgatoID>{data($h/@sid)}</HallgatoID>
+        <Nev>{data($h/nev)}</Nev>
+        <Utca>{data($h/lakcim/utca)}</Utca>
+        <SzuletesiIdo>{data($h/szuletesi_ido)}</SzuletesiIdo>
+    </hallgato>
+
+
+
+(: Hallgatok + beiratkozasok: :)
+
+for $h in doc("/db/egyetem.xml")//hallgato
+let $beiratkozasok := doc("/db/egyetem.xml")//beiratkozas[@sid = $h/@sid]
+for $b in $beiratkozasok
+return
+    <adat>
+        <nev>{$h/nev}</nev>
+        <kepzes>{$b/kepzes_neve}</kepzes>
+        <statusz>{$b/statusz}</statusz>
+    </adat>
+
+
+
+(: Targyak kreditjenek novelese 1-gyel: :)
+for $t in doc("/db/egyetem.xml")//targy return update value $t/kredit with ($t/kredit + 1)
+
+
+
+(: Osszes beiratkozas szama: :)
+count(doc("/db/egyetem.xml")//beiratkozas)
+
+
+
+(: Rendszerben levo osszes kredit szama: :)
+sum(doc("/db/egyetem.xml")//targy/kredit)
+
+
+
+(: Atlagos kurzus maximalis letszam: :)
+avg(doc("/db/egyetem.xml")//kurzus/max_fo)

@@ -1,0 +1,77 @@
+(: Osszes vendeg: :)
+doc("/db/etterem.xml")//vendeg
+
+
+
+(: Szakkozep vegzettseggel rendelkezo szakacsok: :)
+
+for $s in doc("/db/etterem.xml")//szakacs
+where $s/vegzettseg = 'Szakközépiskola'
+return
+    <szakacs>
+        <SzakacsID>{data($s/@szkod)}</SzakacsID>
+        <Nev>{data($s/nev)}</Nev>
+        <Reszleg>{data($s/reszleg)}</Reszleg>
+        <Vegzettsegek>{data($s/vegzettseg)}</Vegzettsegek>
+    </szakacs>
+
+
+
+(: 5 csillagos ettermek: :)
+
+for $e in doc("/db/etterem.xml")//etterem
+where $e/csillag = 5
+return
+    <etterem>
+        <EtteremID>{data($e/@ekod)}</EtteremID>
+        <Nev>{data($e/nev)}</Nev>
+        <Cim>{data($e/cim)}</Cim>
+        <Csillag>{data($e/csillag)}</Csillag>
+    </etterem>
+
+
+
+(: Delutanos gyakronokok: :)
+
+for $g in doc("/db/etterem.xml")//gyakornok
+where $g/muszak = "délután"
+return
+    <gyakornok>
+        <GyakornokID>{data($g/@gykod)}</GyakornokID>
+        <Nev>{data($g/nev)}</Nev>
+        <GyakorlatKezdete>{data($g/gyakorlat/kezdete)}</GyakorlatKezdete>
+        <Muszak>{data($g/muszak)}</Muszak>
+    </gyakornok>
+
+
+
+(: Vendegek + rendeleseik: :)
+
+for $v in doc("/db/etterem.xml")//vendeg
+let $rendelesek :=  doc("/db/etterem.xml")//rendeles[@e_v_v = $v/@vkod]
+for $r in $rendelesek
+return
+    <adat>
+        <nev>{$v/nev}</nev>
+        <osszeg>{$r/osszeg}</osszeg>
+    </adat>
+
+
+
+(: Osszegek novelese 1000-rel: :)
+for $r in doc("/db/etterem.xml")//rendeles return update value $r/osszeg with ($r/osszeg + 1000)
+
+
+
+(: Osszes rendeles szama: :)
+count(doc("/db/etterem.xml")//rendeles)
+
+
+
+(: Rendelesek osszege: :)
+sum(doc("/db/etterem.xml")//rendeles/osszeg)
+
+
+
+(: Atlagos rendelesi ertek: :)
+avg(doc("/db/etterem.xml")//rendeles/osszeg)
