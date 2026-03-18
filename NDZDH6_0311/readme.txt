@@ -1,0 +1,1 @@
+A feladat az NDZDH6_0304 mappában található.
