@@ -1,0 +1,403 @@
+-------- 1. FELADAT -----------
+-- tábla létrehozása
+CREATE TABLE egyetemi_rendszer_xml (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    adat XMLType
+);
+
+-- tábla feltöltése xmlből
+DECLARE
+    v_xml CLOB;
+BEGIN
+    v_xml := '<?xml version="1.0" encoding="UTF-8"?>
+<egyetemi_rendszer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="NDZDH6_XMLSchema1.xsd">
+
+    <egyetem om="1492HU">
+        <nev>Budapesti Műszaki és Gazdaságtudományi Egyetem</nev>
+        <elhelyezkedes>
+            <varos>Budapest</varos>
+            <utca>Műegyetem rkp.</utca>
+            <hazszam>3</hazszam>
+        </elhelyezkedes>
+        <elerhetoseg>
+            <telefon>+36 1 463-1111</telefon>
+            <email>info@mit.bme.hu</email>
+            <fax>+36 1 463-1110</fax>
+        </elerhetoseg>
+    </egyetem>
+
+    <egyetem om="1493HU">
+        <nev>Eötvös Loránd Tudományegyetem</nev>
+        <elhelyezkedes>
+            <varos>Budapest</varos>
+            <utca>Pázmány Péter sétány</utca>
+            <hazszam>1/A</hazszam>
+        </elhelyezkedes>
+        <elerhetoseg>
+            <telefon>+36 1 411-6500</telefon>
+            <email>info@elte.hu</email>
+            <fax>+36 1 411-6501</fax>
+        </elerhetoseg>
+    </egyetem>
+
+    <egyetem om="1494HU">
+        <nev>Debreceni Egyetem</nev>
+        <elhelyezkedes>
+            <varos>Debrecen</varos>
+            <utca>Oktatócentrum</utca>
+            <hazszam>1</hazszam>
+        </elhelyezkedes>
+        <elerhetoseg>
+            <telefon>+36 52 512-900</telefon>
+            <email>info@de.edu</email>
+            <fax>+36 1 411-2342</fax>
+        </elerhetoseg>
+    </egyetem>
+
+    <eloado lid="l1">
+        <nev>Dr. Kovács Ágnes</nev>
+        <lakcim>Budapest, Rákóczi út 10</lakcim>
+        <elerhetoseg>
+            <telefon>+36 20 123-4567</telefon>
+            <email>kovacs.agnes@bme.hu</email>
+        </elerhetoseg>
+        <irodaszam>324</irodaszam>
+    </eloado>
+
+    <eloado lid="l2">
+        <nev>Dr. Szabó Péter</nev>
+        <lakcim>Debrecen, Kossuth Lajos utca 5</lakcim>
+        <elerhetoseg>
+            <telefon>+36 30 987-6543</telefon>
+            <email>szabo.peter@de.edu</email>
+        </elerhetoseg>
+        <irodaszam>215</irodaszam>
+    </eloado>
+
+    <eloado lid="l3">
+        <nev>Dr. Nagy Eszter</nev>
+        <lakcim>Szeged, Rákóczi Ferenc utca 15</lakcim>
+        <elerhetoseg>
+            <telefon>+36 70 555-1234</telefon>
+            <email>nagy.eszter@szeged.edu</email>
+        </elerhetoseg>
+        <irodaszam>108</irodaszam>
+    </eloado>
+
+    <hallgato sid="s1">
+        <nev>Kovács László</nev>
+        <lakcim>
+            <varos>Budapest</varos>
+            <utca>Petőfi Sándor</utca>
+            <hazszam>10</hazszam>
+        </lakcim>
+        <email>kovacs.laszlo@bme.hu</email>
+        <szuletesi_ido>1995-05-20</szuletesi_ido>
+    </hallgato>
+
+    <hallgato sid="s2">
+        <nev>Szűcs Eszter</nev>
+        <lakcim>
+            <varos>Debrecen</varos>
+            <utca>Kossuth Lajos utca</utca>
+            <hazszam>5</hazszam>
+        </lakcim>
+        <email>szucs.eszter@de.edu</email>
+        <szuletesi_ido>1996-08-15</szuletesi_ido>
+    </hallgato>
+
+    <hallgato sid="s3">
+        <nev>Horváth Péter</nev>
+        <lakcim>
+            <varos>Szeged</varos>
+            <utca>Rákóczi Ferenc utca</utca>
+            <hazszam>15</hazszam>
+        </lakcim>
+        <email>horvath.peter@szeged.edu</email>
+        <szuletesi_ido>1997-03-10</szuletesi_ido>
+    </hallgato>
+
+    <kurzus kurzuskod="k1">
+        <nyelv>magyar</nyelv>
+        <tipus>előadás</tipus>
+        <idotartam>90 perc</idotartam>
+        <max_fo>100</max_fo>
+    </kurzus>
+
+    <kurzus kurzuskod="k2">
+        <nyelv>angol</nyelv>
+        <tipus>gyakorlat</tipus>
+        <idotartam>60 perc</idotartam>
+        <max_fo>30</max_fo>
+    </kurzus>
+
+    <kurzus kurzuskod="k3">
+        <nyelv>magyar</nyelv>
+        <tipus>szeminárium</tipus>
+        <idotartam>120 perc</idotartam>
+        <max_fo>20</max_fo>
+    </kurzus>
+
+    <targy targykod="t1">
+        <nev>Adatbázisok</nev>
+        <kredit>5</kredit>
+        <kovetelmeny>GEMAL342B</kovetelmeny>
+    </targy>
+
+    <targy targykod="t2">
+        <nev>Algoritmusok</nev>
+        <kredit>4</kredit>
+        <kovetelmeny>GEMAL342A</kovetelmeny>
+    </targy>
+
+    <targy targykod="t3">
+        <nev>Operációs rendszerek</nev>
+        <kredit>6</kredit>
+        <kovetelmeny>GEMAL342C</kovetelmeny>
+    </targy>
+
+    <szerzodes lid="l1" om="1492HU">
+        <statusz>aktív</statusz>
+        <szervezeti_egyseg>Informatikai Kar</szervezeti_egyseg>
+    </szerzodes>
+
+    <szerzodes lid="l2" om="1493HU">
+        <statusz>aktív</statusz>
+        <szervezeti_egyseg>Természettudományi Kar</szervezeti_egyseg>
+    </szerzodes>
+
+    <szerzodes lid="l3" om="1494HU">
+        <statusz>aktív</statusz>
+        <szervezeti_egyseg>Természettudományi és Informatikai Kar</szervezeti_egyseg>
+    </szerzodes>
+
+    <beiratkozas sid="s1" om="1492HU">
+        <kepzes_neve>BSc Informatika</kepzes_neve>
+        <statusz>aktív</statusz>
+        <tagozat>nappali</tagozat>
+        <szervezeti_egyseg>Informatikai Kar</szervezeti_egyseg>
+    </beiratkozas>
+
+    <beiratkozas sid="s2" om="1493HU">
+        <kepzes_neve>BSc Biológia</kepzes_neve>
+        <statusz>passzív</statusz>
+        <tagozat>nappali</tagozat>
+        <szervezeti_egyseg>Természettudományi Kar</szervezeti_egyseg>
+    </beiratkozas>
+
+    <beiratkozas sid="s3" om="1494HU">
+        <kepzes_neve>BSc Fizika</kepzes_neve>
+        <statusz>aktív</statusz>
+        <tagozat>levelező</tagozat>
+        <szervezeti_egyseg>Természettudományi és Informatikai Kar</szervezeti_egyseg>
+    </beiratkozas>
+
+    <beiratkozas sid="s1" om="1493HU">
+        <kepzes_neve>BSc Biológia</kepzes_neve>
+        <statusz>aktív</statusz>
+        <tagozat>nappali</tagozat>
+        <szervezeti_egyseg>Természettudományi Kar</szervezeti_egyseg>
+    </beiratkozas>
+
+    <oktat lid="l1" targykod="t1"/>
+    <oktat lid="l2" targykod="t2"/>
+    <oktat lid="l3" targykod="t3"/>
+
+    <reszt_vesz sid="s1" kurzuskod="k1"/>
+    <reszt_vesz sid="s2" kurzuskod="k2"/>
+    <reszt_vesz sid="s3" kurzuskod="k3"/>
+
+    <eloadas targykod="t1" kurzuskod="k1">
+        <idopont>kedd 8:00</idopont>
+    </eloadas>
+
+    <eloadas targykod="t2" kurzuskod="k2">
+        <idopont>szerda 10:00</idopont>
+    </eloadas>
+
+    <eloadas targykod="t3" kurzuskod="k3">
+        <idopont>csütörtök 14:00</idopont>
+    </eloadas>
+        
+</egyetemi_rendszer>';
+
+    INSERT INTO egyetemi_rendszer_xml (adat) VALUES (XMLType(v_xml));
+END;
+/
+
+
+-- összes egyetem listázása
+SELECT
+    x.om,
+    x.nev,
+    x.varos,
+    x.utca,
+    x.hazszam,
+    x.telefon
+FROM egyetemi_rendszer_xml v,
+    XMLTABLE('/egyetemi_rendszer/egyetem'
+        PASSING V.adat
+        COLUMNS
+            om VARCHAR2(10) PATH '@om',
+            nev VARCHAR2(200) PATH 'nev',
+            varos VARCHAR2(100) PATH 'elhelyezkedes/varos',
+            utca VARCHAR2(200) PATH 'elhelyezkedes/utca',
+            hazszam VARCHAR2(10) PATH 'elhelyezkedes/hazszam',
+            telefon VARCHAR2(50) PATH 'elerhetoseg/telefon'
+        ) x;
+
+
+-- budapesti egyetemek listázása
+SELECT x.om, x.nev, x.varos
+    FROM egyetemi_rendszer_xml v,
+        XMLTABLE('/egyetemi_rendszer/egyetem'
+            PASSING v.adat
+            COLUMNS
+                om VARCHAR2(10) PATH '@om',
+                nev VARCHAR2(200) PATH 'nev',
+                varos VARCHAR2(100) PATH 'elhelyezkedes/varos'
+            ) x
+    WHERE x.varos = 'Budapest';
+
+
+-- beiratkozások listázása az egyetem nevével (join)
+SELECT b.sid, b.kepzes_neve, b.statusz, e.nev AS egyetem_nev
+    FROM egyetemi_rendszer_xml v,
+        XMLTABLE('/egyetemi_rendszer/beiratkozas'
+        PASSING v.adat
+        COLUMNS
+            sid         VARCHAR2(10)  PATH '@sid',
+            om_b        VARCHAR2(10)  PATH '@om',
+            kepzes_neve VARCHAR2(200) PATH 'kepzes_neve',
+            statusz     VARCHAR2(50)  PATH 'statusz'
+        ) b,
+        XMLTABLE('/egyetemi_rendszer/egyetem'
+            PASSING v.adat
+            COLUMNS
+                om_e VARCHAR2(10)   PATH '@om',
+                nev  VARCHAR2(200)  PATH 'nev'
+            ) e
+WHERE b.om_b = e.om_e;
+
+
+
+------ 2. FELADAT --------
+
+-- cím típus
+CREATE OR REPLACE TYPE elhelyezkedes_t AS OBJECT (
+    varos   VARCHAR2(100),
+    utca    VARCHAR2(200),
+    hazszam VARCHAR2(10)
+);
+/
+
+-- egyetem típus beágyazott objektummal és tagfüggvénnyel
+CREATE OR REPLACE TYPE egyetem_t AS OBJECT (
+    om      VARCHAR2(10),
+    nev     VARCHAR2(200),
+    elhelyezkedes elhelyezkedes_t,
+    MEMBER FUNCTION leiras RETURN VARCHAR2
+);
+/
+
+-- TYPE BODY tagfüggvény
+CREATE OR REPLACE TYPE BODY egyetem_t AS
+    MEMBER FUNCTION leiras RETURN VARCHAR2 IS
+    BEGIN
+        RETURN SELF.nev || ' (' || SELF.elhelyezkedes.varos || ')';
+    END leiras;
+END;
+/
+
+
+
+------ 3. FELADAT --------
+
+-- object table létrehozása
+CREATE TABLE egyetemek OF egyetem_t (
+    PRIMARY KEY (om)
+);
+
+-- feltöltés XML-ből
+INSERT INTO egyetemek
+SELECT egyetem_t(
+    x.om,
+    x.nev,
+    elhelyezkedes_t(x.varos, x.utca, x.hazszam)
+    )
+    FROM egyetemi_rendszer_xml v,
+        XMLTABLE('/egyetemi_rendszer/egyetem'
+            PASSING v.adat
+            COLUMNS
+                om      VARCHAR2(10)    PATH '@om',
+                nev     VARCHAR2(200)   PATH 'nev',
+                varos   VARCHAR2(100)   PATH 'elhelyezkedes/varos',
+                utca    VARCHAR2(200)   PATH 'elhelyezkedes/utca',
+                hazszam VARCHAR2(10)    PATH 'elhelyezkedes/hazszam'
+            ) x;
+
+-- ellenőrzés
+SELECT e.om, e.nev, e.elhelyezkedes.varos, e.elhelyezkedes.utca FROM egyetemek e;
+
+
+
+------- 4. FELADAT ----------
+
+-- tagfüggvény hívása lekérdezésben
+SELECT e.leiras() AS leiras FROM egyetemek e; 
+
+-- egyetemek száma városonként
+SELECT e.elhelyezkedes.varos AS varos,
+        COUNT(*)             AS egyetemek_szama
+    FROM egyetemek e
+    GROUP BY e.elhelyezkedes.varos
+    ORDER BY egyetemek_szama DESC;
+ 
+
+
+--------- 5. FELADAT ----------
+
+-- város update
+UPDATE egyetemek e
+    SET e.elhelyezkedes.varos = 'Budapest Főváros'
+    WHERE e.om = '1492HU';
+
+-- egyetem delete
+DELETE FROM egyetemek e
+    WHERE e.elhelyezkedes.varos = 'Debrecen';
+
+
+
+--------- 6. FELADAT ------------
+
+-- VARRAY típus létrehozása
+CREATE OR REPLACE TYPE targyak_va AS VARRAY(5) OF VARCHAR2(200);
+/
+
+-- Oktató típus VARRAY-jel
+CREATE OR REPLACE TYPE oktato_t AS OBJECT (
+    lid         VARCHAR2(10),
+    nev         VARCHAR2(200),
+    irodaszam   NUMBER,
+    oktatott_targyak targyak_va
+);
+/
+
+-- Object table az oktatókhoz
+CREATE TABLE oktatok OF oktato_t (
+    PRIMARY KEY (lid)
+);
+
+-- feltöltés kézzel
+INSERT INTO oktatok VALUES (
+    oktato_t('l1', 'Dr. Kovács Ágnes', 324, targyak_va('Adatbázisok', 'Operációs rendszerek'))
+);
+
+INSERT INTO oktatok VALUES (
+    oktato_t('l2', 'Dr. Szabó Péter', 215, targyak_va('Algoritmusok'))
+);
+
+-- VARRAY elemeinek lekérdezése TABLE() operátorral
+SELECT o.nev, o.irodaszam, t.COLUMN_VALUE AS targy
+    FROM oktatok o,
+    TABLE(o.oktatott_targyak) t;
