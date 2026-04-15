@@ -1,0 +1,174 @@
+-- 1. feladat
+-- ős személy típus
+CREATE OR REPLACE TYPE szemely_t AS OBJECT (
+    nev VARCHAR2(100),
+    MEMBER FUNCTION bemutatkozas RETURN VARCHAR2,
+    STATIC FUNCTION min_munkakor_eletkor RETURN NUMBER,
+    ORDER MEMBER FUNCTION osszehasonlit(masik_szemely szemely_t) RETURN INTEGER
+) NOT FINAL;
+/
+
+
+CREATE OR REPLACE TYPE BODY szemely_t AS
+    MEMBER FUNCTION bemutatkozas RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'A nevem: ' || SELF.nev;
+    END;
+
+    STATIC FUNCTION min_munkakor_eletkor RETURN NUMBER IS
+    BEGIN
+        RETURN 18;
+    END;
+
+    ORDER MEMBER FUNCTION osszehasonlit(masik_szemely szemely_t) RETURN INTEGER IS
+    BEGIN
+        IF SELF.nev < masik_szemely.nev THEN RETURN -1;
+        ELSIF SELF.nev > masik_szemely.nev THEN RETURN 1;
+        ELSE RETURN 0; 
+        END IF;
+    END;
+END;
+/
+
+
+
+
+
+
+--2. feladat
+-- főszakács típus (név a szemely_t-ből)
+CREATE OR REPLACE TYPE foszakacs_t UNDER szemely_t (
+    fkod VARCHAR2(10),
+    eletkor NUMBER,
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2
+);
+/
+
+CREATE OR REPLACE TYPE BODY foszakacs_t AS
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Főszakács vagyok. A nevem: ' || SELF.nev || ', korom: ' || SELF.eletkor;
+    END;
+END;
+/
+
+
+-- vendég típus 
+CREATE OR REPLACE TYPE vendeg_t UNDER szemely_t (
+    vkod VARCHAR2(10),
+    eletkor NUMBER,
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2
+);
+/
+
+CREATE OR REPLACE TYPE BODY vendeg_t AS
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Vendég vagyok. A nevem: ' || SELF.nev;
+    END;
+END;
+/
+
+
+
+
+
+
+--3. feladat
+-- objectTable létrehozása az ős típusból
+
+CREATE TABLE etterem_szemelyek_tbl OF szemely_t;
+
+
+-- feltöltés vendégekkel és főszakácsokkal xmlből
+INSERT INTO etterem_szemelyek_tbl
+SELECT vendeg_t(x.nev, x.vkod, x.eletkor)
+FROM vendeglatas_xml v,
+     XMLTABLE('/vendeglatas/vendeg'
+     PASSING v.adat
+     COLUMNS
+        vkod VARCHAR2(10) PATH '@vkod',
+        nev VARCHAR2(100) PATH 'nev',
+        eletkor NUMBER PATH 'eletkor'
+     ) x;
+/
+
+
+INSERT INTO etterem_szemelyek_tbl
+SELECT foszakacs_t(x.nev, x.fkod, x.eletkor)
+FROM vendeglatas_xml v,
+     XMLTABLE('/vendeglatas/foszakacs'
+     PASSING v.adat
+     COLUMNS
+        fkod VARCHAR2(10) PATH '@fkod',
+        nev VARCHAR2(100) PATH 'nev',
+        eletkor NUMBER PATH 'eletkor'
+     ) x;
+/
+
+
+
+
+
+
+-- 4. feladat
+-- statikus fv
+SELECT szemely_t.min_munkakor_eletkor() AS min_eletkor FROM DUAL;
+
+-- polimorf fv hívások és abc rendezés
+SELECT s.nev, s.bemutatkozas() AS bemutatkozas 
+FROM etterem_szemelyek_tbl s
+ORDER BY VALUE(s); -- Itt működik az ORDER MEMBER FUNCTION (ABC sorrendbe teszi őket)!
+
+-- eredmény szűrése vendégekre
+SELECT s.nev 
+FROM etterem_szemelyek_tbl s
+WHERE VALUE(s) IS OF (vendeg_t);
+
+-- típuskonverzió altípusra
+SELECT s.nev, TREAT(VALUE(s) AS vendeg_t).eletkor AS eletkor
+FROM etterem_szemelyek_tbl s
+WHERE VALUE(s) IS OF (vendeg_t);
+
+
+
+
+
+
+-- 5. feladat
+-- szakács altípus
+CREATE OR REPLACE TYPE szakacs2_t UNDER szemely_t (
+    szkod VARCHAR2(10),
+    reszleg VARCHAR2(100),
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2
+);
+/
+
+CREATE OR REPLACE TYPE BODY szakacs2_t AS
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Szakács vagyok a(z) ' || SELF.reszleg || ' részlegen, a nevem: ' || SELF.nev;
+    END;
+END;
+/
+
+-- xmlből betöltés
+INSERT INTO etterem_szemelyek_tbl
+SELECT szakacs2_t(x.nev, x.szkod, x.reszleg)
+FROM vendeglatas_xml v,
+     XMLTABLE('/vendeglatas/szakacs'
+     PASSING v.adat
+     COLUMNS
+        szkod VARCHAR2(10) PATH '@szkod',
+        nev VARCHAR2(100) PATH 'nev',
+        reszleg VARCHAR2(100) PATH 'reszleg'
+     ) x;
+/
+
+-- lekérdezés szűrése főszakács, szakácsra (IS OF)
+SELECT s.nev, s.bemutatkozas() AS bemutatkozas 
+FROM etterem_szemelyek_tbl s
+WHERE VALUE(s) IS OF (foszakacs_t, szakacs2_t);
+
+
+
