@@ -1,0 +1,15 @@
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\NDZDH6_0325.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\NDZDH6_0325.AssemblyInfoInputs.cache
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\NDZDH6_0325.AssemblyInfo.cs
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\NDZDH6_0325.csproj.CoreCompileInputs.cache
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\NDZDH6_0325.sourcelink.json
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\bin\Debug\net8.0\NDZDH6_0325.exe
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\bin\Debug\net8.0\NDZDH6_0325.deps.json
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\bin\Debug\net8.0\NDZDH6_0325.runtimeconfig.json
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\bin\Debug\net8.0\NDZDH6_0325.dll
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\bin\Debug\net8.0\NDZDH6_0325.pdb
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\NDZDH6_0325.dll
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\refint\NDZDH6_0325.dll
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\NDZDH6_0325.pdb
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\NDZDH6_0325.genruntimeconfig.cache
+C:\Users\zalan\Documents\Progi\MDB\NDZDH6_0218\NDZDH6_0325\obj\Debug\net8.0\ref\NDZDH6_0325.dll
