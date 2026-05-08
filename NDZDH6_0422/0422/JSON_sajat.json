@@ -1,0 +1,259 @@
+{
+	"egyetemi_rendszer": {
+		"egyetem": [
+			{
+				"nev": "Budapesti Műszaki és Gazdaságtudományi Egyetem",
+				"elhelyezkedes": {
+					"varos": "Budapest",
+					"utca": "Műegyetem rkp.",
+					"hazszam": "3"
+				},
+				"elerhetoseg": {
+					"telefon": "+36 1 463-1111",
+					"email": "info@mit.bme.hu",
+					"fax": "+36 1 463-1110"
+				},
+				"_om": "1492HU"
+			},
+			{
+				"nev": "Eötvös Loránd Tudományegyetem",
+				"elhelyezkedes": {
+					"varos": "Budapest",
+					"utca": "Pázmány Péter sétány",
+					"hazszam": "1/A"
+				},
+				"elerhetoseg": {
+					"telefon": "+36 1 411-6500",
+					"email": "info@elte.hu",
+					"fax": "+36 1 411-6501"
+				},
+				"_om": "1493HU"
+			},
+			{
+				"nev": "Debreceni Egyetem",
+				"elhelyezkedes": {
+					"varos": "Debrecen",
+					"utca": "Oktatócentrum",
+					"hazszam": "1"
+				},
+				"elerhetoseg": {
+					"telefon": "+36 52 512-900",
+					"email": "info@de.edu",
+					"fax": "+36 1 411-2342"
+				},
+				"_om": "1494HU"
+			}
+		],
+		"eloado": [
+			{
+				"nev": "Dr. Kovács Ágnes",
+				"lakcim": "Budapest, Rákóczi út 10",
+				"elerhetoseg": {
+					"telefon": "+36 20 123-4567",
+					"email": "kovacs.agnes@bme.hu"
+				},
+				"irodaszam": "324",
+				"_lid": "l1"
+			},
+			{
+				"nev": "Dr. Szabó Péter",
+				"lakcim": "Debrecen, Kossuth Lajos utca 5",
+				"elerhetoseg": {
+					"telefon": "+36 30 987-6543",
+					"email": "szabo.peter@de.edu"
+				},
+				"irodaszam": "215",
+				"_lid": "l2"
+			},
+			{
+				"nev": "Dr. Nagy Eszter",
+				"lakcim": "Szeged, Rákóczi Ferenc utca 15",
+				"elerhetoseg": {
+					"telefon": "+36 70 555-1234",
+					"email": "nagy.eszter@szeged.edu"
+				},
+				"irodaszam": "108",
+				"_lid": "l3"
+			}
+		],
+		"hallgato": [
+			{
+				"nev": "Kovács László",
+				"lakcim": {
+					"varos": "Budapest",
+					"utca": "Petőfi Sándor",
+					"hazszam": "10"
+				},
+				"email": "kovacs.laszlo@bme.hu",
+				"szuletesi_ido": "1995-05-20",
+				"_sid": "s1"
+			},
+			{
+				"nev": "Szűcs Eszter",
+				"lakcim": {
+					"varos": "Debrecen",
+					"utca": "Kossuth Lajos utca",
+					"hazszam": "5"
+				},
+				"email": "szucs.eszter@de.edu",
+				"szuletesi_ido": "1996-08-15",
+				"_sid": "s2"
+			},
+			{
+				"nev": "Horváth Péter",
+				"lakcim": {
+					"varos": "Szeged",
+					"utca": "Rákóczi Ferenc utca",
+					"hazszam": "15"
+				},
+				"email": "horvath.peter@szeged.edu",
+				"szuletesi_ido": "1997-03-10",
+				"_sid": "s3"
+			}
+		],
+		"kurzus": [
+			{
+				"nyelv": "magyar",
+				"tipus": "előadás",
+				"idotartam": "90 perc",
+				"max_fo": "100",
+				"_kurzuskod": "k1"
+			},
+			{
+				"nyelv": "angol",
+				"tipus": "gyakorlat",
+				"idotartam": "60 perc",
+				"max_fo": "30",
+				"_kurzuskod": "k2"
+			},
+			{
+				"nyelv": "magyar",
+				"tipus": "szeminárium",
+				"idotartam": "120 perc",
+				"max_fo": "20",
+				"_kurzuskod": "k3"
+			}
+		],
+		"targy": [
+			{
+				"nev": "Adatbázisok",
+				"kredit": "5",
+				"kovetelmeny": "GEMAL342B",
+				"_targykod": "t1"
+			},
+			{
+				"nev": "Algoritmusok",
+				"kredit": "4",
+				"kovetelmeny": "GEMAL342A",
+				"_targykod": "t2"
+			},
+			{
+				"nev": "Operációs rendszerek",
+				"kredit": "6",
+				"kovetelmeny": "GEMAL342C",
+				"_targykod": "t3"
+			}
+		],
+		"szerzodes": [
+			{
+				"statusz": "aktív",
+				"szervezeti_egyseg": "Informatikai Kar",
+				"_lid": "l1",
+				"_om": "1492HU"
+			},
+			{
+				"statusz": "aktív",
+				"szervezeti_egyseg": "Természettudományi Kar",
+				"_lid": "l2",
+				"_om": "1493HU"
+			},
+			{
+				"statusz": "aktív",
+				"szervezeti_egyseg": "Természettudományi és Informatikai Kar",
+				"_lid": "l3",
+				"_om": "1494HU"
+			}
+		],
+		"beiratkozas": [
+			{
+				"kepzes_neve": "BSc Informatika",
+				"statusz": "aktív",
+				"tagozat": "nappali",
+				"szervezeti_egyseg": "Informatikai Kar",
+				"_sid": "s1",
+				"_om": "1492HU"
+			},
+			{
+				"kepzes_neve": "BSc Biológia",
+				"statusz": "passzív",
+				"tagozat": "nappali",
+				"szervezeti_egyseg": "Természettudományi Kar",
+				"_sid": "s2",
+				"_om": "1493HU"
+			},
+			{
+				"kepzes_neve": "BSc Fizika",
+				"statusz": "aktív",
+				"tagozat": "levelező",
+				"szervezeti_egyseg": "Természettudományi és Informatikai Kar",
+				"_sid": "s3",
+				"_om": "1494HU"
+			},
+			{
+				"kepzes_neve": "BSc Biológia",
+				"statusz": "aktív",
+				"tagozat": "nappali",
+				"szervezeti_egyseg": "Természettudományi Kar",
+				"_sid": "s1",
+				"_om": "1493HU"
+			}
+		],
+		"oktat": [
+			{
+				"_lid": "l1",
+				"_targykod": "t1"
+			},
+			{
+				"_lid": "l2",
+				"_targykod": "t2"
+			},
+			{
+				"_lid": "l3",
+				"_targykod": "t3"
+			}
+		],
+		"reszt_vesz": [
+			{
+				"_sid": "s1",
+				"_kurzuskod": "k1"
+			},
+			{
+				"_sid": "s2",
+				"_kurzuskod": "k2"
+			},
+			{
+				"_sid": "s3",
+				"_kurzuskod": "k3"
+			}
+		],
+		"eloadas": [
+			{
+				"idopont": "kedd 8:00",
+				"_targykod": "t1",
+				"_kurzuskod": "k1"
+			},
+			{
+				"idopont": "szerda 10:00",
+				"_targykod": "t2",
+				"_kurzuskod": "k2"
+			},
+			{
+				"idopont": "csütörtök 14:00",
+				"_targykod": "t3",
+				"_kurzuskod": "k3"
+			}
+		],
+		"_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+		"_xsi:noNamespaceSchemaLocation": "NDZDH6_XMLSchema1.xsd"
+	}
+}

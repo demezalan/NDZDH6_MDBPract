@@ -1,0 +1,7 @@
+[
+  { "nev": "Modern adatbazisok", "kredit": 5, "tanszek": "Informatika", "nyelvek": ["Magyar", "Angol"] },
+  { "nev": "Webfejlesztes", "kredit": 4, "tanszek": "Informatika", "nyelvek": ["Magyar"] },
+  { "nev": "Mesterseges Intelligencia", "kredit": 6, "tanszek": "Informatika", "nyelvek": ["Angol"] },
+  { "nev": "Kalkulus", "kredit": 5, "tanszek": "Matematika", "nyelvek": ["Magyar"] },
+  { "nev": "Fizika", "kredit": 2, "tanszek": "Fizika", "nyelvek": ["Magyar", "Nemet"] }
+]

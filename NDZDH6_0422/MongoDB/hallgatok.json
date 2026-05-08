@@ -1,0 +1,7 @@
+[
+  { "nev": "Nagy Gabor", "eletkor": 22, "varos": "Miskolc", "atlag": 4.5, "kedvenc_targy": "Modern adatbazisok", "hobbik": ["Sport", "Olvasas"] },
+  { "nev": "Szabo Anna", "eletkor": 20, "varos": "Budapest", "atlag": 4.8, "kedvenc_targy": "Webfejlesztes", "hobbik": ["Zene"] },
+  { "nev": "Kiss Peter", "eletkor": 26, "varos": "Miskolc", "atlag": 3.2, "kedvenc_targy": "Fizika", "hobbik": ["Jatek", "Filmek"] },
+  { "nev": "Kovacs Eva", "eletkor": 23, "varos": "Debrecen", "atlag": 4.9, "kedvenc_targy": "Mesterseges Intelligencia", "hobbik": ["Fozes", "Sport"] },
+  { "nev": "Toth Bence", "eletkor": 21, "varos": "Miskolc", "atlag": 3.8, "kedvenc_targy": "Kalkulus", "hobbik": ["Zene", "Sport"] }
+]

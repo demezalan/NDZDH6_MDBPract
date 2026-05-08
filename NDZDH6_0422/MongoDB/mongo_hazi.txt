@@ -1,0 +1,131 @@
+// 1. feladat: előkészítés
+
+use egyetemi_rendszer
+
+mongoimport --db egyetemi_rendszer --collection targyak --file targyak.json --jsonArray
+mongoimport --db egyetemi_rendszer --collection hallgatok --file hallgatok.json --jsonArray
+
+db.targyak.find()
+db.hallgatok.find()
+
+db.targyak.insertOne({
+    nev: "Szoftverteszteles",
+    kredit: 3,
+    tanszek: "Informatika",
+    nyelvek: ["Magyar", "Angol"]
+})
+
+db.hallgatok.insertOne({
+    nev: "Varga Bálint",
+    eletkor: 24,
+    varos: "Gyor",
+    atlag: 4.1,
+    kedvenc_targy: "Szoftverteszteles",
+    hobbik: ["Fozes", "Utazas"]
+})
+
+
+// 2. feladat: lekérdezések, DML
+
+// a) Összes tárgy nevének és kreditjének kilistázása (_id mező elrejtésével)
+db.targyak.find({}, { nev: 1, kredit: 1, _id: 0 })
+
+// b) Legalább 5 kredites tárgyak lekérdezése
+db.targyak.find({ kredit: { $gte: 5 } })
+
+// c) Miskolci, VAGY legalább 4.5-ös átlaggal rendelkező hallgatók lekérdezése
+db.hallgatok.find({ 
+    $or: [{ varos: "Miskolc" }, { atlag: { $gte: 4.5 } }] 
+})
+
+// d) Top 3 hallgató lekérdezése tanulmányi átlag alapján, csökkenő sorrendben
+db.hallgatok.find().sort({ atlag: -1 }).limit(3)
+
+// e) 21 és 24 év közötti (inclusive) hallgatók lekérdezése
+db.hallgatok.find({ eletkor: { $gte: 21, $lte: 24 } })
+
+// f) Egy konkrét hallgató tanulmányi átlagának módosítása 5.0-ra
+db.hallgatok.updateOne(
+    { nev: "Kiss Peter" }, 
+    { $set: { atlag: 5.0 } }
+)
+
+// g) Új nyelv (elem) hozzáadása egy tárgy nyelvek tömbjéhez
+db.targyak.updateOne(
+    { nev: "Kalkulus" }, 
+    { $push: { nyelvek: "Angol" } }
+)
+
+// h) 3 kreditnél kevesebbet érő tárgyak törlése az adatbázisból
+db.targyak.deleteMany({ kredit: { $lt: 3 } })
+
+
+// 3. Feladat: Indexek
+
+// a) Lekérdezés végrehajtási tervének (explain) vizsgálata index nélkül (COLLSCAN)
+db.hallgatok.find({ nev: "Nagy Gabor" }).explain("executionStats")
+
+// b) Új index létrehozása a név mezőre
+db.hallgatok.createIndex({ nev: 1 })
+
+// c) Lekérdezés végrehajtási tervének vizsgálata az index létrehozása után (IXSCAN)
+db.hallgatok.find({ nev: "Nagy Gabor" }).explain("executionStats")
+
+// d) Összetett index létrehozása: varos (növekvő) és atlag (csökkenő)
+db.hallgatok.createIndex({ varos: 1, atlag: -1 })
+
+// e) Létező indexek listázása, majd a név alapú index törlése
+db.hallgatok.getIndexes()
+db.hallgatok.dropIndex("nev_1")
+
+
+// 4. Feladat: Aggregációs pipeline
+
+// a) Hallgatók számának és átlagos tanulmányi átlagának csoportosítása városonként (csökkenő sorrendben)
+db.hallgatok.aggregate([
+    {
+        $group: {
+            _id: "$varos",
+            hallgatok_szama: { $sum: 1 },
+            atlagos_tanulmanyi_atlag: { $avg: "$atlag" }
+        }
+    },
+    { $sort: { atlagos_tanulmanyi_atlag: -1 } }
+])
+
+// b) Hallgatók és tárgyak összekapcsolása ($lookup), majd szűrés a legalább 5 kredites kedvenc tárggyal rendelkezőkre
+db.hallgatok.aggregate([
+    {
+        $lookup: {
+            from: "targyak",
+            localField: "kedvenc_targy",
+            foreignField: "nev",
+            as: "targy_adatok"
+        }
+    },
+    { $unwind: "$targy_adatok" },
+    { $match: { "targy_adatok.kredit": { $gte: 5 } } },
+    {
+        $project: {
+            _id: 0,
+            nev: 1,
+            varos: 1,
+            kedvenc_targy: 1,
+            kredit: "$targy_adatok.kredit"
+        }
+    }
+])
+
+
+// 5. Feladat: Legjobb átlaggal rendelkező hallgató lekérdezése városonként ($sort + $group + $first)
+
+db.hallgatok.aggregate([
+    { $sort: { atlag: -1 } },
+    {
+        $group: {
+            _id: "$varos",
+            legjobb_diak: { $first: "$nev" },
+            legjobb_atlag: { $first: "$atlag" }
+        }
+    }
+])
